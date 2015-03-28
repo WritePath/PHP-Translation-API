@@ -1,10 +1,12 @@
-WritePath Translation API (PHP, Java)
+WritePath Translation API (PHP)
 ==============================
 
-With the WritePath Translation API and Proofreading API, developers can easily access over 10.000 translators & editors and more than 120 different language pairs and integrate into their own system on demand. For details check the <a href="https://www.writepath.co/en/developers">PHP translation API</a> documentation.
+With the WritePath Translation API and Proofreading API, developers can easily access a large number of experienced translators & editors with industry expertise in more than 35 languages. This API offers an easy an efficient way to integrate translation into your backend system, user interface, document management system, web shop, website content management system (CMS), mobile app, etc. It helps to automate repeating processes, cuts down process costs and gives you more time to focus on your core business.
+
+For details check the <a href="https://www.writepath.co/en/developers">PHP translation API</a> documentation.
 It takes care of authorization, JSON encoding and decoding and it can do a few more very convenient things.
 
-New: A Java translation API client is available upon request
+New: A Java client is available upon request, also see the <a href="https://github.com/writepath/Java-Translation-API">Java translation API</a> repository.
 
 <h2>Getting started:</h2>
 <a href="https://www.writepath.co/en/signup">Sign up</a> at writepath.co and request your API keys.
