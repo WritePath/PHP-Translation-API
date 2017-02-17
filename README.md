@@ -20,6 +20,8 @@ New: A Java client is available upon request, also see the <a href="https://gith
   <li>Fetch job status (POST)</li>
   <li>Fetch current word balance of your account (POST)</li>
   <li>Post a comment (POST)</li>
+  <li>Post multiple jobs with plain text (POST)</li>
+  <li>Fetch multiple job status (jobs posted by above) (POST)</li>
 </ul>
 
 A list of supported languages and categories is available <a href="https://www.writepath.co/en/developers/languages">here</a>.
