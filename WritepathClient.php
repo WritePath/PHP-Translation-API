@@ -39,6 +39,34 @@ class WritepathClient {
 	}
 	
 	/**
+	 * Send batched plain text jobs
+	 *
+	 * @param array of strings $text
+	 *        	The array of text that you want to send to the server
+	 * @param string $instructions
+	 *        	Any additional instructions you want to set
+	 * @param boolean $oneDay
+	 *        	One day editing yes/no
+	 */
+	function sendBatchedPlainText($service, $langID, $category, $text, $instructions = FALSE, $notify_url = FALSE) {
+		if (gettype( $text ) != 'array') {
+			return;
+		}
+		$job = array (
+                'service' => $service,
+                'langID' => $langID,
+                'category' => $category,
+                'body' => $text,
+                'instructions' => $instructions,
+                'notify_url' => $notify_url
+		);
+		$data ['job'] = $job;
+		$params = $this->setParams ( $this->api_key, $this->private_key, $data );
+		$reply = $this->doPost ( $this->url . '/bjobs', $params );
+		return json_decode($reply);
+	}
+	
+	/**
 	 * Send a document for editing, MUST be a docx, xlsx or pptx
 	 *
 	 * @param string $filename        	
@@ -152,7 +180,28 @@ class WritepathClient {
         $data ['format'] = $format;
 		$params = $this->setParams ( $this->api_key, $this->private_key, $data );
 		$reply = $this->doPost ( $this->url . '/jobs/' . $jobId, $params );
-		return json_decode ( $reply, TRUE );
+		$reply_array = json_decode ( $reply, TRUE );
+		$reply_array["response"]["document"] = base64_decode($reply_array["response"]["document"]);
+		return $reply_array;
+	}
+	
+	/**
+	 * Fetch the status of batched jobs from the server
+	 *
+	 * @param string $batchId
+	 *        	The batch id you want to fetch the status of
+	 */
+	function getBatchedStatus($batchId, $format) {
+		if (empty ( $batchId )) {
+			return;
+		}
+        $data ['format'] = $format;
+		$params = $this->setParams ( $this->api_key, $this->private_key, $data );
+		$reply = $this->doPost ( $this->url . '/bjobs/' . $batchId, $params );
+		$reply_array = json_decode ( $reply, TRUE );
+		foreach($reply_array["response"] as $idx => $content)
+			$reply_array["response"][$idx]["document"] = base64_decode($reply_array["response"][$idx]["document"]);
+		return $reply_array;
 	}
 
 	
